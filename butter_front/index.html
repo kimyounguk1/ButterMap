@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>유행지도(버터떡 ++)</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>유행 지도(버터떡)</h1>
+    <div class="topbar-actions">
+      <button id="btn-load-stores">판매처 불러오기</button>
+      <button id="btn-open-register">장소 등록</button>
+      <button id="btn-claim-coupon">쿠폰 받기</button>
+      <!-- <button id="btn-test-payment">결제 테스트</button> -->
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="map-section">
+      <div id="map"></div>
+    </section>
+
+    <aside class="side-panel">
+      <section class="panel-block">
+        <h2>실시간 주문량 랭킹 TOP 10</h2>
+        <ul id="ranking-list" class="ranking-list"></ul>
+      </section>
+
+      <section class="panel-block">
+        <h2>선택한 판매처</h2>
+        <div id="store-detail" class="placeholder">마커를 클릭하면 상세 정보가 표시됩니다.</div>
+      </section>
+
+      <section class="panel-block">
+        <h2>결과 로그</h2>
+        <ul id="log-list"></ul>
+      </section>
+    </aside>
+  </main>
+
+  <dialog id="register-dialog">
+    <form id="register-form" method="dialog">
+      <h3>새 판매처 등록</h3>
+      <label>이름 <input name="name" required /></label>
+      <label>주소 <input name="address" required /></label>
+      <label>위도 <input name="lat" type="number" step="any" required /></label>
+      <label>경도 <input name="lng" type="number" step="any" required /></label>
+      <label>설명 <textarea name="description" rows="3"></textarea></label>
+      <menu>
+        <button value="cancel" type="button" id="btn-cancel-register">취소</button>
+        <button value="submit" type="submit">등록</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId="></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

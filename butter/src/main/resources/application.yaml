@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: butter
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/butter?useSSL=false
+    username: root
+    password: 0807
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show_sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: false
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
