@@ -24,8 +24,19 @@ public class Controller {
 
     @GetMapping("/stores")
     public ResponseEntity<?> getStore() {
+        List<StoreResDto> store = service.getStoreList();
+        return ResponseEntity.ok().body(store);
+    }
+
+    @GetMapping("/storesdb")
+    public ResponseEntity<?> getStoreDB() {
         List<StoreResDto> store = service.getStore();
         return ResponseEntity.ok().body(store);
+    }
+
+    @GetMapping("/store/{id}")
+    public OneStoreResDto getOneStore(@PathVariable Long id) {
+        return service.getOneStore(id);
     }
 
     @PostMapping("/stores/suggest")
@@ -88,6 +99,17 @@ public class Controller {
     public ResponseEntity<String> placeOrder(@RequestBody OrderRequestDto dto) {
         service.createOrder(dto);
         return ResponseEntity.ok("주문이 완료되었습니다.");
+    }
+
+    @GetMapping("/local")
+    public String getLocalCache (@RequestParam String q) {
+        return service.getLocalCache(q);
+
+    }
+
+    @PostMapping("/local")
+    public String saveLocalCache(@RequestParam String q) {
+        return service.saveLocalCache(q);
     }
 
 }
