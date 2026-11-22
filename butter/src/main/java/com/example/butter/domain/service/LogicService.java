@@ -237,13 +237,12 @@ public class LogicService {
     }
 
     public void getCoupon(CouponReqDto couponReqDto) {
-        String key = "coupon:users";
         String limit = "100"; // 선착순 인원 설정
 
         // 루아 스크립트 실행
         Long result = redisTemplate.execute(
                 couponScript,
-                Collections.singletonList(key), // KEYS[1]
+                List.of(CouponWorker.USERS_KEY, CouponWorker.STREAM_KEY), // KEYS[1], KEYS[2]
                 limit,                         // ARGV[1]
                 String.valueOf(couponReqDto.getUserId()) // ARGV[2]
         );
@@ -254,7 +253,7 @@ public class LogicService {
             throw new RuntimeException("모든 쿠폰이 소진되었습니다.");
         }
 
-        // result == 1 이면 성공 (이미 루아 스크립트 내부에서 큐에 들어감)
+        // result == 1 이면 성공 (이미 루아 스크립트 내부에서 Stream에 적재됨)
         System.out.println("발급 대기열 등록 성공: " + couponReqDto.getUserId());
 
     }
